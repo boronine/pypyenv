@@ -2,7 +2,7 @@ As of this writing, PyPy isn't supported by virtualenv, fiddling with both,
 I found a way to use them together and made this script to simplify it for
 other developers. Supports Linux and (experimentally) OS X.
 
-    workon myenv
+    source myenv/bin/activate
     easy_install pypyenv
     pypyenv install # Tries to install PyPy with JIT
     pypyenv --nojit install # Forces non-JIT installation
