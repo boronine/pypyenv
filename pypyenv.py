@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import os
 import sys
 import urllib2
@@ -9,7 +7,9 @@ import stat
 import getopt
 import platform
 
-base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+__version__ = "0.1"
+
+base = sys.prefix
 srcdir = "src"
 bindir = "bin"
 binpypy = os.path.join(bindir, "pypy")
@@ -21,7 +21,7 @@ yes = ("y","yes")
 def out(s):
     print " * " + s
 
-def install():
+def install(download):
     os.chdir(base)
     # Clean up if anything was left over
     uninstall()
@@ -84,11 +84,11 @@ def uninstall():
 def confirm_deletion(tree):
     return raw_input("Delete ENV/%s? [y/N] " % tree) in yes
 
-help_message = """pypyenv install   - installs PyPy in this virtualenv
-pypyenv uninstall - uninstalls PyPy from this virtualenv
-          --nojit - Install non-JIT version."""
+help_message = """   pypyenv install - installs PyPy in this virtualenv
+ pypyenv uninstall - uninstalls PyPy from this virtualenv
+           --nojit - Install non-JIT version."""
 
-if __name__ == "__main__":
+def main():
     if version != "2.5":
         if not raw_input("PyPy implements Python 2.5, you are using a " \
                          "different version, continue? [y/N] ") in yes:
@@ -135,7 +135,7 @@ if __name__ == "__main__":
         download = "http://pypy.org/download/pypy-1.3-osx-nojit.tar.bz2"
 
     if args[0] == "install":
-        install()
+        install(download)
     elif args[0] == "uninstall":
         uninstall()
     else:
