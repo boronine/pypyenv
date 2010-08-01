@@ -1,0 +1,78 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import urllib2
+import tarfile
+import shutil
+import stat
+
+base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+srcdir = os.path.join(base, "src")
+bindir = os.path.join(base, "bin")
+binpypy = os.path.join(bindir, "pypy")
+pypydir = os.path.join(base, "pypy")
+
+def install():
+    # Clean up if anything was left over
+    uninstall()
+    # Create src directory
+    if not os.path.exists(srcdir):
+        print "creating %s directory" % srcdir
+        os.mkdir(srcdir)
+    archive = os.path.join(srcdir, "pypy-1.3-linux.tar.bz2")
+    # Download archive
+    if os.path.exists(archive):
+        print "using previously downloaded %s" % archive
+    else:
+        print "downloading PyPy"
+        linux_jit = "http://pypy.org/download/pypy-1.3-linux.tar.bz2"
+        urlfile = urllib2.urlopen(linux_jit)
+        archivefile = open(archive, "w")
+        while True:
+            data = urlfile.read(4096)
+            if not data:
+                break
+            archivefile.write(data)
+    # Unpack archive
+    archiveobj = tarfile.open(archive, mode="r:bz2")
+    unpacked = os.path.join(srcdir, archiveobj.next().name)
+    if os.path.exists(unpacked):
+        print "using previously unpacked %s" % unpacked
+    else:
+        print "unpacking archive"
+        archiveobj.extractall(srcdir)
+    # Copying PyPy directory into virtualenv root
+    print "copying PyPy directory into root"
+    shutil.copytree(unpacked, pypydir)
+    # Install PyPy executable symlink
+    print "installing %s symlink" % binpypy
+    os.symlink(os.path.join(pypydir, "bin", "pypy"), binpypy)
+    print "giving it execute permissions"
+    os.chmod(binpypy, stat.S_IXUSR)
+    # Install site-packages symlink
+    pythonsite = os.path.join(base, "lib", "python2.5", "site-packages")
+    pypysite = os.path.join(base, "pypy", "site-packages")
+    os.symlink(pythonsite, pypysite)
+
+def uninstall():
+    if os.path.exists(binpypy):
+        print "deleting %s symlink" % binpypy
+        os.remove(binpypy)
+    if os.path.exists(pypydir):
+        print "deleting %s" % pypydir
+        shutil.rmtree(pypydir)
+
+help_message = """pypyenv install   - installs PyPy in this virtualenv
+pypyenv uninstall - uninstalls PyPy from this virtualenv"""
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print help_message
+    elif sys.argv[1] == "install":
+        install()
+    elif sys.argv[1] == "uninstall":
+        uninstall()
+    else:
+        print help_message
