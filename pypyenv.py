@@ -7,7 +7,7 @@ import stat
 import getopt
 import platform
 
-__version__ = "0.1"
+__version__ = "0.1.1"
 
 base = sys.prefix
 srcdir = "src"
@@ -42,6 +42,7 @@ def install(download):
             if not data:
                 break
             archivefile.write(data)
+        archivefile.close()
     # Unpack archive
     archiveobj = tarfile.open(archive, mode="r:bz2")
     unpacked = os.path.join(srcdir, archiveobj.next().name)
@@ -49,11 +50,7 @@ def install(download):
         out("deleting ENV/%s" % unpacked)
         shutil.rmtree(unpacked)
     out("unpacking archive")
-    try:
-        archiveobj.extractall(srcdir)
-    except EOFError:
-        # FIXME: Investigate why this sometimes only works on the second try
-        archiveobj.extractall(srcdir)
+    archiveobj.extractall(srcdir)
     # Copying PyPy directory into virtualenv root
     out("copying PyPy directory into root")
     shutil.copytree(unpacked, pypydir)
