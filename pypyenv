@@ -46,7 +46,11 @@ def install():
         out("deleting ENV/%s" % unpacked)
         shutil.rmtree(unpacked)
     out("unpacking archive")
-    archiveobj.extractall(srcdir)
+    try:
+        archiveobj.extractall(srcdir)
+    except EOFError:
+        # FIXME: Investigate why this sometimes only works on the second try
+        archiveobj.extractall(srcdir)
     # Copying PyPy directory into virtualenv root
     out("copying PyPy directory into root")
     shutil.copytree(unpacked, pypydir)
