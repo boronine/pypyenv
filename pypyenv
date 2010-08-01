@@ -15,6 +15,8 @@ bindir = "bin"
 binpypy = os.path.join(bindir, "pypy")
 pypydir = "pypy"
 
+version = sys.version[:3]
+
 def out(s):
     print " * " + s
 
@@ -60,7 +62,7 @@ def install():
     out("giving it execute permissions")
     os.chmod(binpypy, stat.S_IXUSR)
     # Install site-packages symlink
-    pythonsite = os.path.join("..", "lib", "python2.5", "site-packages")
+    pythonsite = os.path.join("..", "lib", "python" + version, "site-packages")
     pypysite = os.path.join("pypy", "site-packages")
     out("installing ENV/%s symlink" % pypysite)
     os.symlink(pythonsite, pypysite)
@@ -87,6 +89,10 @@ pypyenv uninstall - uninstalls PyPy from this virtualenv
           --nojit - Install non-JIT version."""
 
 if __name__ == "__main__":
+    if version != "2.5":
+        if not raw_input("PyPy implements Python 2.5, you are using a " \
+            "different version, continue? [y/N] "):
+           sys.exit(1) 
     try:
         opts, args = getopt.getopt(sys.argv[1:], "", ["nojit"])
     except getopt.GetoptError:
