@@ -86,8 +86,8 @@ help_message = """   pypyenv install - installs PyPy in this virtualenv
            --nojit - Install non-JIT version."""
 
 def main():
-    if version != "2.5":
-        if not raw_input("PyPy implements Python 2.5, you are using a " \
+    if version != "2.7":
+        if not raw_input("PyPy implements Python 2.7, you are using a " \
                          "different version, continue? [y/N] ") in yes:
            sys.exit(1) 
     try:
@@ -121,15 +121,15 @@ def main():
         sys.exit(2) 
 
     if linux and x86 and jit:
-        download = "http://pypy.org/download/pypy-1.3-linux.tar.bz2"
+        download = "http://pypy.org/download/pypy-1.5-linux.tar.bz2"
     if linux and x86 and nojit:
-        download = "http://pypy.org/download/pypy-1.3-linux-nojit.tar.bz2"
+        download = "http://pypy.org/download/pypy-1.5-linux-nojit.tar.bz2"
     elif linux and x86_64:
-        download = "http://pypy.org/download/pypy-1.3-linux64-nojit.tar.bz2"
+        download = "http://pypy.org/download/pypy-1.5-linux64-nojit.tar.bz2"
     elif osx and jit:
-        download = "http://pypy.org/download/pypy-1.3-osx.tar.bz2"
+        download = "http://pypy.org/download/pypy-1.5-osx.tar.bz2"
     elif osx and nojit:
-        download = "http://pypy.org/download/pypy-1.3-osx-nojit.tar.bz2"
+        download = "http://pypy.org/download/pypy-1.5-osx-nojit.tar.bz2"
 
     if args[0] == "install":
         install(download)
