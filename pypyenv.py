@@ -87,7 +87,7 @@ help_message = """   pypyenv install - installs PyPy in this virtualenv
 
 def main():
     if version != "2.7":
-        if not raw_input("PyPy implements Python 2.5, you are using a " \
+        if not raw_input("PyPy implements Python 2.7, you are using a " \
                          "different version, continue? [y/N] ") in yes:
            sys.exit(1) 
     try:
