@@ -117,16 +117,13 @@ def main():
     if win:
         print "Supports only Linux and OS X at this point"
         sys.exit(2)
-    if x86_64 and jit:
-        print "JIT is not supported on x86_64, rerun with --nojit"
-        sys.exit(2) 
 
     if linux and x86 and jit:
         download = "http://pypy.org/download/pypy-1.5-linux.tar.bz2"
     if linux and x86 and nojit:
         download = "http://pypy.org/download/pypy-1.5-linux-nojit.tar.bz2"
     elif linux and x86_64:
-        download = "http://pypy.org/download/pypy-1.5-linux64-nojit.tar.bz2"
+        download = "http://pypy.org/download/pypy-1.5-linux64.tar.bz2"
     elif osx and jit:
         download = "http://pypy.org/download/pypy-1.5-osx.tar.bz2"
     elif osx and nojit:
