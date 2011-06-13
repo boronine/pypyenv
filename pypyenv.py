@@ -63,6 +63,7 @@ def install(download):
     pythonsite = os.path.join("..", "lib", "python" + version, "site-packages")
     pypysite = os.path.join("pypy", "site-packages")
     out("installing ENV/%s symlink" % pypysite)
+    shutil.rmtree(pypysite)
     os.symlink(pythonsite, pypysite)
 
 def uninstall():
