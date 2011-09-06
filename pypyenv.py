@@ -118,16 +118,12 @@ def main():
         print "Supports only Linux and OS X at this point"
         sys.exit(2)
 
-    if linux and x86 and jit:
+    if linux and x86:
         download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.6-linux.tar.bz2"
-    if linux and x86 and nojit:
-        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.6-linux-nojit.tar.bz2"
     elif linux and x86_64:
         download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.6-linux64.tar.bz2"
-    elif osx and jit:
-        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.6-osx.tar.bz2"
-    elif osx and nojit:
-        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.6-osx-nojit.tar.bz2"
+    elif osx:
+        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.6-osx64.tar.bz2"
 
     if args[0] == "install":
         install(download)
