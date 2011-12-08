@@ -119,11 +119,11 @@ def main():
         sys.exit(2)
 
     if linux and x86:
-        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.6-linux.tar.bz2"
+        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.7-linux.tar.bz2"
     elif linux and x86_64:
-        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.6-linux64.tar.bz2"
+        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.7-linux64.tar.bz2"
     elif osx:
-        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.6-osx64.tar.bz2"
+        download = "https://bitbucket.org/pypy/pypy/downloads/pypy-1.7-osx64.tar.bz2"
 
     if args[0] == "install":
         install(download)
