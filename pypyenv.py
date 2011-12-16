@@ -7,7 +7,7 @@ import stat
 import getopt
 import platform
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 base = sys.prefix
 srcdir = "src"
@@ -83,29 +83,17 @@ def confirm_deletion(tree):
     return raw_input("Delete ENV/%s? [y/N] " % tree) in yes
 
 help_message = """   pypyenv install - installs PyPy in this virtualenv
- pypyenv uninstall - uninstalls PyPy from this virtualenv
-           --nojit - Install non-JIT version."""
+ pypyenv uninstall - uninstalls PyPy from this virtualenv"""
 
 def main():
     if version != "2.7":
         if not raw_input("PyPy implements Python 2.7, you are using a " \
                          "different version, continue? [y/N] ") in yes:
            sys.exit(1) 
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "", ["nojit"])
-    except getopt.GetoptError:
-        print help_message
-        sys.exit(2)
 
     if len(args) != 1:
         print help_message
         sys.exit(2)
-
-    nojit = False
-    for o, a in opts:
-        if o == "--nojit": 
-            nojit = True
-    jit = not nojit
 
     osx = platform.system() == "Darwin"
     win = platform.system() == "Windows"

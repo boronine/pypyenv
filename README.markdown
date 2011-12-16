@@ -14,7 +14,6 @@ This script supports Linux and (experimentally) OS X.
     source myenv/bin/activate
     easy_install pypyenv
     pypyenv install         # Tries to install PyPy with JIT
-    pypyenv --nojit install # Forces non-JIT installation
     pypyenv uninstall       # Uninstalls PyPy from virtualenv
 
 pypyenv will create a `pypy` executable in your virtualenv's `bin` folder,
