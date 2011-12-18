@@ -1,4 +1,6 @@
 *.pyc
+*.swp
+*.swo
 build
 dist
 pypyenv.egg-info
