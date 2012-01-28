@@ -11,13 +11,13 @@ setup(
     name='pypyenv',
     version=__version__,
     description='Install PyPy in virtualenv',
-    long_description="Install PyPy as an optional Python 2.5 interpretor "\
+    long_description="Install PyPy as an optional Python interpretor "\
         "in a virtualenv on Linux and OS X systems.",
     author="Alexei Boronine",
     license="MIT",
     author_email="alexei.boronine@gmail.com",
-    url="http://github.com/alexeiboronine/pypyenv",
-    download_url="http://github.com/alexeiboronine/pypyenv/downloads",
+    url="http://github.com/boronine/pypyenv",
+    download_url="http://github.com/boronine/pypyenv/downloads",
     keywords="pypy virtualenv",
     classifiers=[
         "Development Status :: 3 - Alpha",

@@ -4,10 +4,9 @@ import urllib2
 import tarfile
 import shutil
 import stat
-import getopt
 import platform
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 base = sys.prefix
 srcdir = "src"
@@ -16,7 +15,7 @@ binpypy = os.path.join(bindir, "pypy")
 pypydir = "pypy"
 
 version = sys.version[:3]
-yes = ("y","yes")
+yes = ("y", "yes")
 
 def out(s):
     print " * " + s
@@ -86,6 +85,7 @@ help_message = """   pypyenv install - installs PyPy in this virtualenv
  pypyenv uninstall - uninstalls PyPy from this virtualenv"""
 
 def main():
+    args = sys.argv[1:]
     if version != "2.7":
         if not raw_input("PyPy implements Python 2.7, you are using a " \
                          "different version, continue? [y/N] ") in yes:
@@ -118,5 +118,5 @@ def main():
     elif args[0] == "uninstall":
         uninstall()
     else:
-        print help_message
+	print help_message
 
